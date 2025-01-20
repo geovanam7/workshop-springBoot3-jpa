@@ -1,19 +1,31 @@
 package com.project.course.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class User  implements Serializable {
+
+
+@Entity
+public class Users implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String Name;
     private String Email;
     private String Phone;
     private String Password;
 
-    public User() {
+    public Users() {
     }
 
-    public User(Long id, String Name, String Email, String Phone, String Password) {
+    public Users(Long id, String Name, String Email, String Phone, String Password) {
         super();
         this.id = id;
         this.Name=Name;
@@ -65,8 +77,8 @@ public class User  implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return Objects.equals(getId(), user.getId());
+        if (!(o instanceof Users users)) return false;
+        return Objects.equals(getId(), users.getId());
     }
 
     @Override
