@@ -29,6 +29,8 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
+    // colecao de itens associado a order
+
 
 
     public Order() {

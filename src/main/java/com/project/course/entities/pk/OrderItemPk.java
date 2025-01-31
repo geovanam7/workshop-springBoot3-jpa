@@ -13,6 +13,7 @@ import java.util.Objects;
 public class OrderItemPk implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    // associacao muitos para um
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;

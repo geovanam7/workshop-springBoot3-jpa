@@ -16,6 +16,7 @@ public class OrderItem implements Serializable {
 
     @EmbeddedId
     private OrderItemPk id = new OrderItemPk();
+    // Order da classe orderItem logo = id.order
     private Integer quantity;
     private Double price;
 
@@ -37,6 +38,7 @@ public class OrderItem implements Serializable {
     public void setOrder(Order order){
         id.setOrder(order);
     }
+
     public Product getProduct(){
         return id.getProduct();
     }
