@@ -31,6 +31,8 @@ public class Order implements Serializable {
     private Set<OrderItem> items = new HashSet<>();
     // colecao de itens associado a order
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL) //mapeando as entidades para ter o mesmo id
+    private Payment paymenyt;
 
 
     public Order() {
@@ -85,5 +87,13 @@ public class Order implements Serializable {
 
     public void setItems(Set<OrderItem> items) {
         this.items = items;
+    }
+
+    public Payment getPaymenyt() {
+        return paymenyt;
+    }
+
+    public void setPaymenyt(Payment paymenyt) {
+        this.paymenyt = paymenyt;
     }
 }
