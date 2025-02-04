@@ -1,6 +1,7 @@
 package com.project.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.course.entities.pk.OrderItemPk;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -62,6 +63,11 @@ public class OrderItem implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @JsonProperty("subTotal")
+    public Double getSubTotal(){
+        return price*quantity;
     }
 
 

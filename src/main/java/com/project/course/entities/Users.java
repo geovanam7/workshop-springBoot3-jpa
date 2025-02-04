@@ -1,6 +1,7 @@
 package com.project.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class Users implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "client")
+    @JsonPropertyOrder({ "id", "name", "email", "phone", "password" })
     private List<Order> orders = new ArrayList<>();
 
     public Users() {

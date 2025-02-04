@@ -1,16 +1,20 @@
 package com.project.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.project.course.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "tb-order")
+@JsonPropertyOrder({ "id", "moment", "orderStatus", "client", "items", "payment", "total" })
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 @Id
@@ -31,8 +35,8 @@ public class Order implements Serializable {
     private Set<OrderItem> items = new HashSet<>();
     // colecao de itens associado a order
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL) //mapeando as entidades para ter o mesmo id
-    private Payment paymenyt;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)//mapeando as entidades para ter o mesmo id
+    private Payment payment;
 
 
     public Order() {
@@ -90,10 +94,35 @@ public class Order implements Serializable {
     }
 
     public Payment getPaymenyt() {
-        return paymenyt;
+        return payment;
     }
 
     public void setPaymenyt(Payment paymenyt) {
-        this.paymenyt = paymenyt;
+        this.payment = paymenyt;
     }
+
+
+    @JsonProperty("total")
+
+    public Double getTotal(){
+        double sum = 0;
+        for (OrderItem x: items){
+            sum+= x.getSubTotal();
+        }
+     return sum;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order order)) return false;
+        return Objects.equals(getId(), order.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
 }
