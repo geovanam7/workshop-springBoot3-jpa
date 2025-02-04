@@ -2,6 +2,7 @@ package com.project.course.services;
 
 import com.project.course.entities.Users;
 import com.project.course.repositories.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,11 @@ public class UserService {
         return obj.get();
     }
 
+   public Users insert (Users obj){
+        return repository.save(obj);
+   }
+    }
 
-}
+
+
+
