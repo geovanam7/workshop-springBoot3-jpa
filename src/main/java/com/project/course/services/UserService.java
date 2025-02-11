@@ -2,6 +2,7 @@ package com.project.course.services;
 
 import com.project.course.entities.Users;
 import com.project.course.repositories.UserRepository;
+import com.project.course.services.exception.ResourceNotFoundException;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class UserService {
 
     public Users findById (Long id){
         Optional<Users> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
    public Users insert (Users obj){
